@@ -3,10 +3,11 @@ import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product/product.service';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-products',
-  imports: [AddProductModalComponent, MatDialogModule],
+  imports: [ MatDialogModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -53,17 +54,18 @@ throw new Error('Method not implemented.');
       maxWidth: '400px',
       height: 'auto',
       maxHeight: '80vh',
-      panelClass: 'custom-dialog-container', // ou ce que tu veux
+      panelClass: 'custom-dialog-container',
       disableClose: true,
-      data: product ? { product } : undefined
+      data: product ? { productToEdit: product } : {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'refresh') {
-        this.loadProducts(); // recharge la liste
+        this.loadProducts();
       }
     });
   }
+
 
 
   closeAddProductModal() {
@@ -76,17 +78,29 @@ throw new Error('Method not implemented.');
 
 
   onDelete(productId: number) {
-    if (confirm("Voulez-vous vraiment supprimer ce produit ?")) {
-      this.productService.deleteProduct(productId).subscribe({
-        next: () => {
-          this.loadProducts();
-        },
-        error: (err) => {
-          console.error('Erreur suppression produit', err);
-        }
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Confirmer la suppression',
+        message: 'Voulez-vous vraiment supprimer ce produit ? Cette action est irréversible.'
+      },
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productService.deleteProduct(productId).subscribe({
+          next: () => {
+            this.loadProducts();
+          },
+          error: (err) => {
+            console.error('Erreur suppression produit', err);
+          }
+        });
+      }
+    });
   }
+
 
 
 }

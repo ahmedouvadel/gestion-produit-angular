@@ -86,21 +86,29 @@ export class AddProductModalComponent implements OnInit {
       return;
     }
 
-    const product = {
+    const payload = {
       ...this.form.value,
-      image: this.imageUrl, // Ajout de l'image uploadée
+      image: this.imageUrl
     };
 
-    this.productService.createProduct(product).subscribe({
-      next: () => {
-        console.log('Produit ajouté avec succès');
-        this.productAdded.emit(); // 🔄 Actualiser la liste des produits
-        this.closeModal.emit(); // ❌ Fermer la modal
-      },
-      error: (err) => {
-        console.error("Erreur lors de l'ajout du produit", err);
-      },
-    });
+    if (this.data.productToEdit) {
+      this.productService.updateProduct(this.data.productToEdit.id, payload).subscribe({
+        next: () => {
+          this.productAdded.emit();
+          this.dialogRef.close();
+        },
+        error: (err) => console.error('Erreur update', err)
+      });
+    } else {
+      this.productService.createProduct(payload).subscribe({
+        next: () => {
+          this.productAdded.emit();
+          this.dialogRef.close();
+        },
+        error: (err) => console.error('Erreur ajout', err)
+      });
+    }
   }
+
 
 }
