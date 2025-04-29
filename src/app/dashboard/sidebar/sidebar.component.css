@@ -1,0 +1,55 @@
+.sidbar {
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  background: #FFF;
+  box-shadow: 0 17px 35px rgba(0, 0, 0, 0.12);
+  font-family: 'Poppins';
+}
+.btnContainer {
+  margin-top: 2.36rem;
+  margin-left: 0.87rem;
+  margin-right: 1.12rem;
+  display: flex;
+  width: 17.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.20rem;
+  flex-shrink: 0;
+}
+.btn1:hover {
+  cursor: pointer;
+  background-color: #9eaacf;
+  border-radius: 1rem;
+}
+.active {
+  background-color: #1C2B58;
+  border-radius: 1rem;
+  box-shadow: -10px 10px 30px rgba(46, 46, 46, 0.1), 10px 10px 30px rgba(46, 46, 46, 0.1), 0px 10px 30px rgba(46, 46, 46, 0.1);
+  color: white;
+}
+.btn1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+img {
+  margin-left: 1.5rem;
+  margin-top: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  margin-top: 1.19rem;
+  margin-bottom: 1rem;
+}
+
+.background {
+  height: 75rem;
+}
+
+/* css TS */
+

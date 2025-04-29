@@ -1,0 +1,22 @@
+<div class="bg-white shadow-lg rounded-xl p-4 w-full max-w-lg">
+  <h2 class="text-xl font-bold mb-4 text-[#1C2B58]">Ajouter un produit</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <input formControlName="name" type="text" placeholder="Nom" class="input input-primary w-full" />
+    <input formControlName="description" type="text" placeholder="Description" class="input input-primary w-full" />
+    <input formControlName="price" type="number" placeholder="Prix" class="input input-primary w-full" />
+    <input formControlName="category_id" type="number" placeholder="ID Catégorie" class="input input-primary w-full" />
+
+    <input type="file" (change)="onImageSelected($event)" class="file-input file-input-primary w-full" />
+    <div *ngIf="isUploading">Upload image en cours...</div>
+
+    <img *ngIf="imageUrl" [src]="imageUrl" class="w-32 h-32 object-cover mt-2 rounded" />
+
+    <div class="flex justify-end gap-3 mt-4">
+      <button type="submit" class="btn bg-primary text-white hover:bg-[#333] px-6" [disabled]="!form.valid || isUploading">
+        Créer
+      </button>
+      <button type="button" class="btn btn-outline" (click)="dialogRef.close()">Annuler</button>
+    </div>
+  </form>
+</div>

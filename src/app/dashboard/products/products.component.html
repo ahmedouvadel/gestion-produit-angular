@@ -1,0 +1,84 @@
+<div class="flex flex-col p-4 gap-6 ">
+
+  <!-- 🔍 Barre de recherche + bouton d'ajout -->
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-4">
+    <!-- Barre de recherche -->
+    <div class="w-full md:w-1/2">
+      <div class="join w-full">
+        <input type="text" placeholder="Rechercher un produit..." class="input input-primary join-item w-full" />
+        <div class="py-2 px-3 join-item rounded-r-full bg-[#1C2B58] text-white hover:bg-[#333]">
+          Rechercher
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton Ajouter produit -->
+    <div>
+      <div (click)="openAddProductModal()"
+        class="py-2 px-3 bg-[#1C2B58] text-white hover:bg-[#333333] rounded-xl shadow-md cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-3d">
+        + Ajouter un produit
+      </div>
+    </div>
+  </div>
+
+  <!-- 📦 Liste des produits -->
+  <div class="overflow-x-auto shadow-md rounded-xl bg-white">
+    <table class="table table-zebra">
+      <!-- En-tête -->
+      <thead class="bg-gray-100">
+        <tr>
+          <th><input type="checkbox" class="checkbox" /></th>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Catégorie ID</th>
+          <th>prix</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <!-- Corps -->
+      <tbody>
+        @for (product of filteredProducts(); track product.id) {
+        <tr>
+          <td><input type="checkbox" class="checkbox" /></td>
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar">
+                <div class="mask mask-squircle w-12 h-12">
+                  <img [src]="product.image" [alt]="product.name" />
+                </div>
+              </div>
+              <div>
+                <div class="font-bold">{{ product.name }}</div>
+              </div>
+            </div>
+          </td>
+          <td>{{ product.description }}</td>
+          <td>
+            {{ product.category_id }}
+            <br />
+            <span class="badge badge-ghost badge-sm">Catégorie ID</span>
+          </td>
+          <td>{{ product.price }} MRO</td>
+          <td class="flex py-4 gap-2">
+            <button (click)="openDetail(product.id)">
+              <img  src="/assets/eyes_icon.svg" alt="Détail" class="h-6 w-6 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+            <button
+            (click)="onEdit(product)"
+            >
+              <img src="/assets/edit_icon.svg" alt="Edit" class="h-5 w-5 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+            <button
+            (click)="onDelete(product.id)"
+            >
+              <img
+              src="/assets/blouque_icon.svg" alt="Supprimer" class="h-5 w-5 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

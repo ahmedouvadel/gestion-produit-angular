@@ -1,0 +1,42 @@
+<div class="m-1 flex background flex-row w-full">
+  <div class="sidbar">
+    <div class="flex justify-center">
+      <img src="assets/logo2.png" class="w-20 h-auto mx-auto mt-5 transition-transform hover:scale-105" alt="Logo">
+    </div>
+
+    <div class="btnContainer">
+      <div
+        [routerLink]="'/home/products'"
+        routerLinkActive="active"
+        class="btn1 text-neutral-400 text-lg font-medium font-['Poppins'] hover:text-white"
+        (mouseenter)="onMouseEnter('products')"
+        (mouseleave)="onMouseLeave('products')">
+        <img class="w-8 h-8" [src]="getImageSrc('products')" alt="Vendeurs Icon">
+        <p>Products</p>
+      </div>
+
+      <div
+        [routerLink]="'/home/categories'"
+        routerLinkActive="active"
+        class="btn1 text-neutral-400 text-lg font-medium font-['Poppins'] hover:text-white"
+        (mouseenter)="onMouseEnter('categories')"
+        (mouseleave)="onMouseLeave('categories')">
+        <img class="w-8 h-8" [src]="getImageSrc('categories')" alt="Pages Icon">
+        <p>Categories</p>
+      </div>
+
+      <div
+      [routerLink]="'/home/users'"
+      routerLinkActive="active"
+      class="btn1 text-neutral-400 text-lg font-medium font-['Poppins'] hover:text-white"
+      (mouseenter)="onMouseEnter('users')"
+      (mouseleave)="onMouseLeave('users')">
+      <img class="w-8 h-8" [src]="getImageSrc('users')" alt="Sous admin Icon">
+      <p>Users</p>
+    </div>
+    </div>
+  </div>
+  <div class="w-full ">
+    <router-outlet></router-outlet>
+  </div>
+</div>
