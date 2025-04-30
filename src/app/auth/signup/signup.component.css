@@ -1,0 +1,13 @@
+/* styles.css ou signup.component.css */
+.snackbar-success {
+  background-color: #1C2B58; /* fond sombre */
+  color: white;              /* texte blanc */
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.snackbar-error {
+  background-color: #b91c1c; /* rouge foncé */
+  color: white;
+  font-weight: 500;
+}

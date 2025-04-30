@@ -1,1 +1,74 @@
-<p>categories works!</p>
+<app-header></app-header>
+
+<div class="flex flex-col p-4 gap-6">
+
+  <!-- 🔍 Search + Ajouter bouton -->
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-4">
+    <div class="join w-full md:w-1/2">
+      <input type="text"  placeholder="Rechercher une catégorie..."
+        class="input input-primary join-item w-full" />
+      <div class="py-2 px-3 join-item rounded-r-full bg-[#1C2B58] text-white hover:bg-[#333]">
+        Rechercher
+      </div>
+    </div>
+
+    <div>
+      <div (click)="addCategory()"
+        class="py-2 px-3 bg-[#1C2B58] text-white hover:bg-[#333333] rounded-xl shadow-md cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-3d">
+        + Ajouter une catégorie
+      </div>
+    </div>
+  </div>
+
+  <!-- 📋 Liste catégories -->
+  <div class="flex rounded-xl bg-white shadow-md">
+    <table class="table table-zebra">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cat of filteredCategories(); track cat.id) {
+        <tr>
+          <td>{{ cat.id }}</td>
+          <td>{{ cat.name }}</td>
+          <td class="flex py-4 gap-2">
+            <button
+            (click)="editCategory(cat)"
+            >
+              <img src="/assets/edit_icon.svg" alt="Edit" class="h-5 w-5 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+            <button
+            (click)="deleteCategory(cat.id)"
+            >
+              <img
+              src="/assets/blouque_icon.svg" alt="Supprimer" class="h-5 w-5 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🧾 Carte de détail -->
+  @if(selectedCategory) {
+  <div class="flex justify-center p-6">
+    <div class="card bg-base-100 w-96 shadow-lg">
+      <figure>
+        <img src="/assets/category.jpg" alt="Categorie Image" class="object-cover h-48 w-full" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title text-[#1C2B58]">{{ selectedCategory.name }}</h2>
+        <div class="card-actions justify-between mt-4">
+          <div class="badge badge-outline">ID: {{ selectedCategory.id }}</div>
+          <button class="btn btn-sm btn-secondary" (click)="closeDetails()">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

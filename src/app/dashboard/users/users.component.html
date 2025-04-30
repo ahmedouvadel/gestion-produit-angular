@@ -1,1 +1,33 @@
-<p>users works!</p>
+<app-header></app-header>
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Liste des utilisateurs</h2>
+
+  <table class="table w-full border p-4">
+    <thead>
+      <tr class="bg-gray-200">
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Date de création</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id) {
+        <tr class="border-t">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.created_at | date: 'short' }}</td>
+          <td>
+              <button
+              (click)="deleteUser(user.id)"            >
+              <img
+              src="/assets/blouque_icon.svg" alt="Supprimer" class="h-5 w-5 transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-110" />
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

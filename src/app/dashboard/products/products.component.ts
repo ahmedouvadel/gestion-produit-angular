@@ -4,17 +4,17 @@ import { ProductService } from '../../services/product/product.service';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { ProductDetailModalComponent } from '../../components/product-detail-modal/product-detail-modal.component';
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-products',
-  imports: [ MatDialogModule],
+  imports: [MatDialogModule, HeaderComponent,HeaderComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
-openDetail(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  selectedProduct: Product | null = null;
   searchTerm: string = '';
   showModal = false;
   dialog=inject(MatDialog)
@@ -66,11 +66,21 @@ throw new Error('Method not implemented.');
     });
   }
 
-
-
   closeAddProductModal() {
     this.showModal = false;
   }
+
+  openDetail(productId: number) {
+    const product = this.products.find(p => p.id === productId);
+    if (product) {
+      this.dialog.open(ProductDetailModalComponent, {
+        width: '420px',
+        data: product
+      });
+    }
+  }
+
+
 
   onEdit(product: Product) {
     this.openAddProductModal(product);
