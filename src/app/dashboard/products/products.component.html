@@ -6,12 +6,12 @@
   <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-4">
     <!-- Barre de recherche -->
     <div class="w-full md:w-1/2">
-      <div class="join w-full">
-        <input type="text" placeholder="Rechercher un produit..." class="input input-primary join-item w-full" />
+      <form class="join w-full" [formGroup]="searchForm">
+        <input type="text" formControlName="keyword" (input)="filterProducts()" placeholder="Rechercher un produit..." class="input input-primary join-item w-full" />
         <div class="py-2 px-3 join-item rounded-r-full bg-[#1C2B58] text-white hover:bg-[#333]">
           Rechercher
         </div>
-      </div>
+      </form>
     </div>
 
     <!-- Bouton Ajouter produit -->
@@ -40,7 +40,7 @@
 
       <!-- Corps -->
       <tbody>
-        @for (product of filteredProducts(); track product.id) {
+        @for (product of filteredProduct; track product.id) {
         <tr>
           <td><input type="checkbox" class="checkbox" /></td>
           <td>
